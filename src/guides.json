@@ -1,0 +1,87 @@
+[
+      {
+        "name": "Emily Johnson",
+        "image": "https://i.ibb.co/kKtbZpc/pexels-valeriia-miller-3361154.jpg",
+        "phone": "+1111111111",
+        "email": "emily.johnson@example.com",
+        "education": "Bachelor's in History",
+        "skills": ["History Enthusiast", "Language Proficiency", "Customer Interaction"],
+        "experience": "4 years",
+        "rating": 4.7,
+        "comments": [
+          {"user": "David", "comment": "Emily provided an insightful historical tour."},
+          {"user": "Sarah", "comment": "Great communication skills and friendly demeanor."}
+        ]
+      },
+      {
+        "name": "Alex Rodriguez",
+        "image": "https://i.ibb.co/xJbJfy7/pexels-simon-robben-614810.jpg",
+        "phone": "+2222222222",
+        "email": "alex.rodriguez@example.com",
+        "education": "Bachelor's in Cultural Anthropology",
+        "skills": ["Cultural Knowledge", "Outdoor Adventure", "Multilingual"],
+        "experience": "6 years",
+        "rating": 4.9,
+        "comments": [
+          {"user": "Liam", "comment": "Alex made the tour adventurous and educational."},
+          {"user": "Emma", "comment": "Very knowledgeable about different cultures. Loved the tour!"}
+        ]
+      },
+      {
+        "name": "Sophia Patel",
+        "image": "https://i.ibb.co/nL6Lyv2/pexels-polina-tankilevitch-4519122.jpg",
+        "phone": "+3333333333",
+        "email": "sophia.patel@example.com",
+        "education": "Master's in Art History",
+        "skills": ["Art Expertise", "Language Proficiency", "Customer Engagement"],
+        "experience": "5 years",
+        "rating": 4.8,
+        "comments": [
+          {"user": "Noah", "comment": "Sophia's art insights made the tour fascinating."},
+          {"user": "Ava", "comment": "Excellent guide for art enthusiasts! Highly recommend."}
+        ]
+      },
+      {
+        "name": "Benjamin Lee",
+        "image": "https://i.ibb.co/bvMMg3Z/pexels-pixabay-220453.jpg",
+        "phone": "+4444444444",
+        "email": "benjamin.lee@example.com",
+        "education": "Bachelor's in Environmental Science",
+        "skills": ["Nature Exploration", "Wildlife Knowledge", "Communication"],
+        "experience": "3 years",
+        "rating": 4.5,
+        "comments": [
+          {"user": "Mia", "comment": "Benjamin's nature tour was refreshing and educational."},
+          {"user": "Jackson", "comment": "Great guide for outdoor enthusiasts! Learned a lot about wildlife."}
+        ]
+      },
+      {
+        "name": "Olivia Williams",
+        "image": "https://i.ibb.co/nfpV1rM/pexels-andrea-piacquadio-774909.jpg",
+        "phone": "+5555555555",
+        "email": "olivia.williams@example.com",
+        "education": "Bachelor's in Architecture",
+        "skills": ["Architectural Knowledge", "City Exploration", "Customer Interaction"],
+        "experience": "4 years",
+        "rating": 4.6,
+        "comments": [
+          {"user": "Lucas", "comment": "Olivia's architectural insights added depth to the city tour."},
+          {"user": "Sophie", "comment": "Enjoyed the tour, especially the historical architecture details!"}
+        ]
+      },
+      {
+        "name": "Ethan Nguyen",
+        "image": "https://i.ibb.co/MBnX3Zw/pexels-andrea-piacquadio-733872.jpg",
+        "phone": "+6666666666",
+        "email": "ethan.nguyen@example.com",
+        "education": "Master's in Cultural Studies",
+        "skills": ["Cultural Awareness", "Language Proficiency", "Customer Engagement"],
+        "experience": "7 years",
+        "rating": 4.9,
+        "comments": [
+          {"user": "Lily", "comment": "Ethan's cultural insights made the tour memorable."},
+          {"user": "Christopher", "comment": "Fantastic guide! Learned a lot about different cultures."}
+        ]
+      }
+    ]
+  
