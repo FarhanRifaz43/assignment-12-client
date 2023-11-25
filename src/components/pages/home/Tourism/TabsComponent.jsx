@@ -6,7 +6,7 @@ import TabThree from './TabThree';
 
 const TabsComponent = () => {
     return (
-        <div className="text-center md:w-[85%] mx-auto mb-10">
+        <div className="text-center md:w-[85%] mx-auto mb-20">
             <Tabs>
                 <div className=' text-gray-400'>
                     <TabList>
