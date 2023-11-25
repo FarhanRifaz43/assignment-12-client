@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 const TourTypes = () => {
     return (
-        <div className='w-[85%] mx-auto'>
+        <div className='w-[85%] mx-auto mb-20'>
             <Swiper
                 slidesPerView={5}
                 spaceBetween={30}
