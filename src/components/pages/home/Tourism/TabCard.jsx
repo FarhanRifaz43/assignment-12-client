@@ -1,4 +1,5 @@
 import { FaHeart } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const TabCard = ({ pack }) => {
     return (
@@ -14,7 +15,7 @@ const TabCard = ({ pack }) => {
                 <div className="flex justify-between items-center px-4 pb-5 mt-8">
                     <div className="text-xl">${pack.price}</div>
                     <div className='flex items-center gap-2'>
-                    <div className="btn btn-sm btn-info btn-outline">View Package</div>
+                        <Link to={`/packages/${pack._id}`}><div className="btn btn-sm btn-info btn-outline">View Package</div></Link>
                         <div className="rounded-full p-1 border-2 border-red-500"><FaHeart className='text-red-500'></FaHeart></div>
                     </div>
                 </div>
