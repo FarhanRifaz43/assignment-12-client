@@ -1,6 +1,8 @@
 import { useLoaderData } from "react-router-dom";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation, FreeMode } from 'swiper/modules';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 import 'swiper/css';
 import 'swiper/css/free-mode';
@@ -8,11 +10,18 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import useGuides from "../../../hooks/useGuides";
 import GuideCard from "../home/Tourism/GuideCard";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 const PackageDetail = () => {
 
     const { type, title, price, image, gallery, description, plan, location } = useLoaderData();
     const [guides, loading] = useGuides();
+    const { register, handleSubmit, reset } = useForm();
+    const [startDate, setStartDate] = useState(new Date());
+    const onSubmit = async (data) => {
+        console.log(data)
+    }
 
     return (
         <div className="pt-24 w-[85%] mx-auto">
@@ -56,7 +65,92 @@ const PackageDetail = () => {
                             <p>${price}/person</p>
                         </div>
                         <div>
-                            <button className="btn btn-info w-full btn-sm text-white">Book Now</button>
+                            <button className="btn btn-info w-full btn-sm text-white" onClick={() => document.getElementById('my_modal_3').showModal()}>Book Now</button>
+                            <dialog id="my_modal_3" className="modal">
+                                <div className="modal-box">
+                                    <form method="dialog">
+                                        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                    </form>
+                                    <h2 className="text-center font-bold text-2xl mt-5 mb-2">Book {title}</h2>
+                                    <hr />
+                                    <form onSubmit={handleSubmit(onSubmit)}>
+                                        <div className="form-control w-full my-2">
+                                            <label className="label">
+                                                <span className="label-text">Package Name*</span>
+                                            </label>
+                                            <input
+                                                type="text"
+                                                value={title}
+                                                {...register('title', { required: true })}
+                                                required
+                                                className="input input-bordered w-full" />
+                                        </div>
+                                        <div className="flex gap-6">
+                                            <div className="form-control w-full my-2">
+                                                <label className="label">
+                                                    <span className="label-text">Your Name*</span>
+                                                </label>
+                                                <input
+                                                    type="name"
+                                                    placeholder="name"
+                                                    {...register('name', { required: true })}
+                                                    className="input input-bordered w-full" />
+                                            </div>
+                                            <div className="form-control w-full my-2">
+                                                <label className="label">
+                                                    <span className="label-text">Your Email*</span>
+                                                </label>
+                                                <input
+                                                    type="email"
+                                                    placeholder="email"
+                                                    {...register('email', { required: true })}
+                                                    className="input input-bordered w-full" />
+                                            </div>
+                                        </div>
+                                        <div className="flex gap-6">
+                                            {/* category */}
+                                            <div className="form-control w-full my-2">
+                                                <label className="label">
+                                                    <span className="label-text">Select Guide*</span>
+                                                </label>
+                                                <select defaultValue="default" {...register('selectedGuide', { required: true })}
+                                                    className="select select-bordered w-full">
+                                                    <option disabled value="default">Choose a Guide</option>
+                                                    {
+                                                        guides.map(guide => <option key={guide._id} value={guide.name}>{guide.name}</option>)
+                                                    }
+                                                </select>
+                                            </div>
+                                            {/* price */}
+                                            <div className="form-control w-full my-2">
+                                                <label className="label">
+                                                    <span className="label-text">Price*</span>
+                                                </label>
+                                                <input
+                                                    type="number"
+                                                    placeholder="Price"
+                                                    {...register('price', { required: true })}
+                                                    className="input input-bordered w-full" />
+                                            </div>
+                                        </div>
+                                        {/* recipe details */}
+                                        <div className="form-control">
+                                            <label className="label">
+                                                <span className="label-text">Tour Date*</span>
+                                            </label>
+                                            <DatePicker
+                                                value={startDate}
+                                                selected={startDate} onChange={(date) => setStartDate(date)}
+                                                className="input input-bordered w-full" placeholder="Bio"></DatePicker>
+                                            <input hidden value={startDate} {...register('date', { required: true })}>
+                                            </input>
+                                        </div>
+                                        <button className="btn mt-4 w-full btn-info">
+                                            Add Item
+                                        </button>
+                                    </form>
+                                </div>
+                            </dialog>
                         </div>
                     </div>
                 </div>
