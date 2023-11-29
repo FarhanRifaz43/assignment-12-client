@@ -19,7 +19,34 @@ const ManageUsers = () => {
 
         const guideRes = await axiosSecure.post('/guides', guide);
         const guideUserRes = await axiosSecure.patch(`/users/${data.email}`, guideUser);
-        window.location.reload();
+        if (guideUserRes.data.modifiedCount > 0) {
+            refetch();
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: `${data.displayName} is now a guide`,
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
+    }
+    const handleMakeAdmin = async (data) => {
+
+        const adminUser = {
+            role: 'admin'
+        }
+
+        const adminUserRes = await axiosSecure.patch(`/users/${data.email}`, adminUser);
+        if (adminUserRes.data.modifiedCount > 0) {
+            refetch();
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: `${data.displayName} is now an admin`,
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
     }
 
     return (
@@ -62,7 +89,7 @@ const ManageUsers = () => {
                                 </button>}
                             </td>
                             <td>
-                                {(user.role === 'user') ? <button
+                                {(user.role === 'user') ? <button onClick={() => handleMakeAdmin(user)}
                                     className="btn btn-outline btn-info btn-sm">
                                     Make Admin
                                 </button> : <button disabled

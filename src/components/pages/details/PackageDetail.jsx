@@ -72,7 +72,7 @@ const PackageDetail = () => {
                     className="mySwiper rounded-xl"
                 >
                     {
-                        gallery.map(photo => <SwiperSlide key={photo}> <img className="h-[70vh] w-full object-cover rounded-xl" src={photo} /></SwiperSlide>)
+                        gallery?.map(photo => <SwiperSlide key={photo}> <img className="h-[70vh] w-full object-cover rounded-xl" src={photo} /></SwiperSlide>)
                     }
                 </Swiper>
             </div>
@@ -144,7 +144,7 @@ const PackageDetail = () => {
                                                     className="select select-bordered w-full">
                                                     <option disabled value="default">Choose a Guide</option>
                                                     {
-                                                        guides.map(guide => <option key={guide._id} value={guide.name}>{guide.name}</option>)
+                                                        guides?.map(guide => <option key={guide._id} value={guide.name}>{guide.name}</option>)
                                                     }
                                                 </select>
                                             </div>
@@ -181,7 +181,7 @@ const PackageDetail = () => {
                 </div>
                 <div className="lg:col-span-2">
                     {
-                        plan.map((day, index) =>
+                        plan?.map((day, index) =>
                             <>
                                 <div className="collapse collapse-arrow bg-base-200 border-b">
                                     <input type="radio" name="my-accordion-2" />

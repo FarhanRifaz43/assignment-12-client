@@ -3,19 +3,20 @@ import useAxiosPublic from "./useAxiosPublic";
 import { AuthContext } from "../providers/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 
-const useBookings = () => {
+const useAssigned = () => {
 
     const axiosPublic = useAxiosPublic();
     const { user} = useContext(AuthContext);
-    const { refetch, data: bookings = [] } = useQuery({
+    const { refetch, data: allBookings = [] } = useQuery({
         queryKey: ['booking', user?.email],
         queryFn: async() => {
-            const res = await axiosPublic.get(`/bookings/user?email=${user.email}`);
+            const res = await axiosPublic.get(`/bookings`);
             return res.data;
         }
     })
 
-    return [bookings, refetch]
+    return [allBookings, refetch]
+
 };
 
-export default useBookings;
+export default useAssigned;

@@ -1,10 +1,27 @@
 import { FaTrashAlt } from "react-icons/fa";
 import useBookings from "../../hooks/useBookings";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 
 const MyBookings = () => {
 
- const [bookings] = useBookings();
+ const [bookings, refetch] = useBookings();
+ const axiosSecure = useAxiosSecure();
+
+ const handleCancel = async(id) => {
+    const deleteRes = await axiosSecure.delete(`/bookings/${id}`);
+    if (deleteRes.data.deletedCount > 0) {
+        refetch();
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Cancelled successfully.',
+            showConfirmButton: false,
+            timer: 1500
+        });
+ }
+}
 
     return (
         <div>
@@ -45,10 +62,26 @@ const MyBookings = () => {
                                 {booking.status}
                             </td>
                             <th>
-                                <button
-                                    className="btn btn-ghost btn-lg">
-                                    <FaTrashAlt className="text-red-600"></FaTrashAlt>
+                                <button disabled
+                                    className="btn btn-info btn-outline btn-sm">
+                                    Apply
                                 </button>
+                            </th>
+                            <th>
+                                {booking.status === 'In Review' && <button onClick={() => handleCancel(booking._id)}
+                                    className="btn btn-error btn-outline btn-sm">
+                                    Cancel
+                                </button>}
+                            </th>
+                            <th>
+                                {booking.status === 'Accepted' && <button
+                                    className="btn btn-success btn-outline btn-sm">
+                                    Pay
+                                </button>}
+                                {booking.status !== 'Accepted' && <button disabled
+                                    className="btn btn-success btn-outline btn-sm">
+                                    Pay
+                                </button>}
                             </th>
                         </tr>)
                     }

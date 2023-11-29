@@ -4,8 +4,8 @@ import useAdmin from "../hooks/useAdmin";
 
 const Dashboard = () => {
 
-    const [isGuide, isGuideLoading ] = useGuide();
-    const [isAdmin, isAdminLoading] = useAdmin();
+    const [isGuide] = useGuide();
+    const [isAdmin] = useAdmin();
 
     return (
         <div className="flex">

@@ -1,9 +1,43 @@
 import { FaTrashAlt } from "react-icons/fa";
 import useWishlist from "../../hooks/useWishlist";
+import { Link } from "react-router-dom";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 
 const MyWishlist = () => {
 
-    const [wishlist] = useWishlist();
+    const [wishlist, refetch] = useWishlist();
+    const axiosSecure = useAxiosSecure();
+
+    const handleRemove = pack => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Remove"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                const res = await axiosSecure.delete(`/wishlist/${pack._id}`);
+                // console.log(res.data);
+                if (res.data.deletedCount > 0) {
+                    // refetch to update the ui
+                    refetch();
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: `Removed from wishlist`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+
+
+            }
+        });
+    }
 
     return (
         <div>
@@ -17,7 +51,6 @@ const MyWishlist = () => {
                         <th>Package Name</th>
                         <th>Tour Type</th>
                         <th>Price</th>
-                        <th></th>
                         <th>Actions</th>
                         <th></th>
                     </tr>
@@ -35,12 +68,18 @@ const MyWishlist = () => {
                                 {wish.type}
                             </td>
                             <td>${wish.price}</td>
-                            <th>
-                                <button
-                                    className="btn btn-ghost btn-lg">
-                                    <FaTrashAlt className="text-red-600"></FaTrashAlt>
+                            <td>
+                                <button onClick={() => handleRemove(wish)}
+                                    className="btn btn-outline btn-error btn-sm">
+                                    Remove
                                 </button>
-                            </th>
+                            </td>
+                            <td>
+                                <button
+                                    className="btn btn-outline btn-info btn-sm">
+                                    Details
+                                </button>
+                            </td>
                         </tr>)
                     }
 

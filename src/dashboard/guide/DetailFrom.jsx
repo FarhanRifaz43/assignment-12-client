@@ -24,7 +24,7 @@ const DetailFrom = () => {
         }
 
         const guideRes = await axiosPublic.patch(`/guides/${user.email}`, guide);
-        if (guideRes.data.insertedId) {
+        if (guideRes.data.modifiedCount > 0) {
             reset();
             Swal.fire({
                 position: 'center',
@@ -48,7 +48,7 @@ const DetailFrom = () => {
                     </label>
                     <input
                         type="text"
-                        defaultValue={user.displayName}
+                        value={user.displayName} readOnly
                         placeholder="Your name"
                         {...register('name', { required: true })}
                         required
@@ -102,7 +102,7 @@ const DetailFrom = () => {
                         className="input input-bordered w-full" />
                 </div>
                 <button className="btn mt-6 w-full btn-info">
-                    Add Item
+                    Update
                 </button>
             </form>
         </div>

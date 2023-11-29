@@ -45,7 +45,7 @@ const GuideProfile = () => {
                             <h2 className="text-lg">Job Skills:</h2>
                             <ul className="text-gray-400">
                                 {
-                                    skills.map(skill => <li className="mt-2 list-disc" key={skill}>{skill}</li>)
+                                    skills?.map(skill => <li className="mt-2 list-disc" key={skill}>{skill}</li>)
                                 }
                             </ul>
                         </div>
