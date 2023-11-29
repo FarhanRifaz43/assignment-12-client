@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation, FreeMode } from 'swiper/modules';
 import DatePicker from "react-datepicker";
@@ -10,17 +10,45 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import useGuides from "../../../hooks/useGuides";
 import GuideCard from "../home/Tourism/GuideCard";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import Swal from "sweetalert2";
+import { AuthContext } from "../../../providers/AuthProvider";
 
 const PackageDetail = () => {
-
+    const {user} = useContext(AuthContext);
     const { type, title, price, image, gallery, description, plan, location } = useLoaderData();
+    const axiosPublic = useAxiosPublic();
     const [guides, loading] = useGuides();
     const { register, handleSubmit, reset } = useForm();
     const [startDate, setStartDate] = useState(new Date());
+    const navigate = useNavigate();
+
+
     const onSubmit = async (data) => {
-        console.log(data)
+        const booking = {
+            userName: data.name,
+            userEmail: data.email,
+            packageName: data.title,
+            guideName: data.selectedGuide,
+            tourDate: data.date.slice(4, 15),
+            price: data.price,
+            status: "In Review",
+        }
+
+        const bookingRes = await axiosPublic.post('/bookings', booking);
+        if (bookingRes.data.insertedId) {
+            reset();
+            navigate('/')
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Service booked successfully.',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
     }
 
     return (
@@ -76,11 +104,11 @@ const PackageDetail = () => {
                                     <form onSubmit={handleSubmit(onSubmit)}>
                                         <div className="form-control w-full my-2">
                                             <label className="label">
-                                                <span className="label-text">Package Name*</span>
+                                                <span className="label-text">Package Name</span>
                                             </label>
                                             <input
                                                 type="text"
-                                                value={title}
+                                                value={title} readOnly
                                                 {...register('title', { required: true })}
                                                 required
                                                 className="input input-bordered w-full" />
@@ -88,27 +116,26 @@ const PackageDetail = () => {
                                         <div className="flex gap-6">
                                             <div className="form-control w-full my-2">
                                                 <label className="label">
-                                                    <span className="label-text">Your Name*</span>
+                                                    <span className="label-text">Your Name</span>
                                                 </label>
                                                 <input
                                                     type="name"
-                                                    placeholder="name"
+                                                    value={user?.displayName} readOnly
                                                     {...register('name', { required: true })}
                                                     className="input input-bordered w-full" />
                                             </div>
                                             <div className="form-control w-full my-2">
                                                 <label className="label">
-                                                    <span className="label-text">Your Email*</span>
+                                                    <span className="label-text">Your Email</span>
                                                 </label>
                                                 <input
                                                     type="email"
-                                                    placeholder="email"
+                                                    value={user?.email} readOnly
                                                     {...register('email', { required: true })}
                                                     className="input input-bordered w-full" />
                                             </div>
                                         </div>
                                         <div className="flex gap-6">
-                                            {/* category */}
                                             <div className="form-control w-full my-2">
                                                 <label className="label">
                                                     <span className="label-text">Select Guide*</span>
@@ -121,19 +148,17 @@ const PackageDetail = () => {
                                                     }
                                                 </select>
                                             </div>
-                                            {/* price */}
                                             <div className="form-control w-full my-2">
                                                 <label className="label">
-                                                    <span className="label-text">Price*</span>
+                                                    <span className="label-text">Price</span>
                                                 </label>
                                                 <input
                                                     type="number"
-                                                    placeholder="Price"
+                                                    value={price} readOnly
                                                     {...register('price', { required: true })}
                                                     className="input input-bordered w-full" />
                                             </div>
                                         </div>
-                                        {/* recipe details */}
                                         <div className="form-control">
                                             <label className="label">
                                                 <span className="label-text">Tour Date*</span>
@@ -146,7 +171,7 @@ const PackageDetail = () => {
                                             </input>
                                         </div>
                                         <button className="btn mt-4 w-full btn-info">
-                                            Add Item
+                                            Book The Package
                                         </button>
                                     </form>
                                 </div>

@@ -15,7 +15,7 @@ const Stories = () => {
                 }
             </div>
             <div className="w-fit mx-auto">
-                <Link><button className="btn btn-info btn-outline">All Stories</button></Link>
+                <Link to={'/stories'}><button className="btn btn-info btn-outline">All Stories</button></Link>
             </div>
         </div>
     );

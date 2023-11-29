@@ -1,5 +1,6 @@
 import Rating from 'react-rating';
 import { FaRegStar, FaStar } from "react-icons/fa6";
+import { Link } from 'react-router-dom';
 
 const GuideCard = ({ guide }) => {
     return (
@@ -11,12 +12,12 @@ const GuideCard = ({ guide }) => {
                 <div className="card-body items-center text-center">
                     <h2 className="card-title">{guide.name}</h2>
                     <Rating
-                            initialRating={guide.rating}
-                            emptySymbol={<FaRegStar className='text-gray-300'/>}
-                            fullSymbol={<FaStar className='text-yellow-600' />}
-                        />
+                        initialRating={guide.rating}
+                        emptySymbol={<FaRegStar className='text-gray-300' />}
+                        fullSymbol={<FaStar className='text-yellow-600' />}
+                    />
                     <div className="card-actions">
-                        <button className="btn btn-outline btn-info">Details</button>
+                        <Link to={`/guides/${guide._id}`}><button className="btn btn-outline btn-info">Details</button></Link>
                     </div>
                 </div>
             </div>
