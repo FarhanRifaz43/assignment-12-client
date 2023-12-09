@@ -1,8 +1,12 @@
-# React + Vite
+This is a tour-service website project.
+This project is made using React.js, Node.js, Mongodb, express, firebase, tailwind.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Features of this project:
+1. There are different authorization roles (ex. guide, admin, user)
+2. for every role there is different dashboard
+3. user can see the services, book them, post stories, and keep track of their bookings
+4. guide can update guide profile, see pending services, choose whether to accept or reject
+5. admin can add new packages, promote an user to guide or admin
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+client side link: https://assignment-12-auth-c8cb4.web.app/
